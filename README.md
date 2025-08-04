@@ -6,3 +6,4 @@ Steps To Run the Project:
  5) It will generate the link and click the link it will open in the chrome browser.
  6) there you can captioning and segmenting the image.
  7) And finally the project will execute successfully.
+<img width="1917" height="973" alt="Screenshot 2025-08-04 180807" src="https://github.com/user-attachments/assets/f33d80dd-8465-4334-90a7-c162c6d5d3fe" />
