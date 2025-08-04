@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./static/uploads:/app/static/uploads
+      - ./static/outputs:/app/static/outputs
+    environment:
+      - FLASK_ENV=production
+      - FLASK_DEBUG=False
+    env_file:
+      - .env
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./static:/app/static
+    depends_on:
+      - app
+    restart: unless-stopped

@@ -1,0 +1,38 @@
+# Core dependencies for basic functionality
+flask>=2.2.0
+flask-cors>=3.0.10
+pillow>=9.0.0
+numpy>=1.21.0
+matplotlib>=3.5.0
+
+# Basic ML dependencies (lighter versions)
+torch>=1.12.0 --index-url https://download.pytorch.org/whl/cpu
+torchvision>=0.13.0 --index-url https://download.pytorch.org/whl/cpu
+
+# Advanced image captioning (optional but recommended)
+# Uncomment the line below for better AI-powered captions
+# transformers>=4.20.0
+
+# Other optional dependencies for full functionality
+# opencv-python>=4.6.0
+# scikit-learn>=1.1.0
+# scipy>=1.8.0
+# timm>=0.6.0
+# einops>=0.4.0
+# albumentations>=1.2.0
+# pandas>=1.4.0
+# h5py>=3.7.0
+# pycocotools>=2.0.4
+# imageio>=2.19.0
+# scikit-image>=0.19.0
+# tqdm>=4.64.0
+# wandb>=0.12.0
+# tensorboard>=2.9.0
+# python-dotenv>=0.20.0
+# pydantic>=1.9.0
+# marshmallow>=3.17.0
+# pytest>=7.1.0
+# pytest-cov>=3.0.0
+# black>=22.0.0
+# flake8>=4.0.0
+# isort>=5.10.0

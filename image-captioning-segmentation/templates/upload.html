@@ -1,0 +1,391 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Image - {{ super() }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-cloud-upload-alt me-2"></i>
+                        Upload Image for Analysis
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" enctype="multipart/form-data" id="upload-form">
+                        <!-- File Upload Section -->
+                        <div class="upload-area mb-4" id="upload-area">
+                            <div class="upload-content text-center">
+                                <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                                <h5>Drag & Drop Your Image Here</h5>
+                                <p class="text-muted mb-3">or click to browse files</p>
+                                <input type="file" 
+                                       name="file" 
+                                       id="file-input" 
+                                       accept="image/*" 
+                                       required
+                                       style="display: none;">
+                                <button type="button" class="btn btn-outline-primary" id="browse-btn">
+                                    <i class="fas fa-folder-open me-2"></i>
+                                    Choose File
+                                </button>
+                            </div>
+                            <div class="upload-preview d-none" id="upload-preview">
+                                <img id="preview-image" src="" alt="Preview" class="img-fluid rounded mb-3">
+                                <div class="file-info">
+                                    <span id="file-name" class="fw-bold"></span>
+                                    <span id="file-size" class="text-muted ms-2"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Task Selection -->
+                        <div class="task-selection mb-4">
+                            <h5 class="mb-3">
+                                <i class="fas fa-tasks me-2"></i>
+                                Select Analysis Task
+                            </h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="task-option">
+                                        <input type="radio" name="task" value="captioning" id="task-caption" class="task-radio">
+                                        <label for="task-caption" class="task-label">
+                                            <div class="task-icon">
+                                                <i class="fas fa-comment-alt"></i>
+                                            </div>
+                                            <div class="task-info">
+                                                <h6>Image Captioning</h6>
+                                                <small class="text-muted">Generate descriptive text</small>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="task-option">
+                                        <input type="radio" name="task" value="segmentation" id="task-segment" class="task-radio">
+                                        <label for="task-segment" class="task-label">
+                                            <div class="task-icon">
+                                                <i class="fas fa-puzzle-piece"></i>
+                                            </div>
+                                            <div class="task-info">
+                                                <h6>Segmentation</h6>
+                                                <small class="text-muted">Identify object regions</small>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="task-option">
+                                        <input type="radio" name="task" value="both" id="task-both" class="task-radio" checked>
+                                        <label for="task-both" class="task-label">
+                                            <div class="task-icon">
+                                                <i class="fas fa-brain"></i>
+                                            </div>
+                                            <div class="task-info">
+                                                <h6>Both Tasks</h6>
+                                                <small class="text-muted">Complete analysis</small>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg" id="submit-btn" disabled>
+                                <i class="fas fa-magic me-2"></i>
+                                Analyze Image
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Progress Section -->
+            <div class="progress-section mt-4 d-none" id="progress-section">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Processing...</span>
+                        </div>
+                        <h5>Processing Your Image...</h5>
+                        <p class="text-muted mb-0">This may take a few moments depending on the task complexity</p>
+                        <div class="progress mt-3">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                 role="progressbar" 
+                                 style="width: 0%" 
+                                 id="progress-bar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Supported Formats Info -->
+            <div class="info-section mt-4">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fas fa-info-circle text-info me-2"></i>
+                            Supported Formats & Guidelines
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Supported Formats:</strong>
+                                <ul class="list-unstyled mt-2">
+                                    <li><i class="fas fa-check text-success me-2"></i>JPEG (.jpg, .jpeg)</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>PNG (.png)</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>BMP (.bmp)</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>TIFF (.tiff, .tif)</li>
+                                    <li><i class="fas fa-check text-success me-2"></i>WebP (.webp)</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Guidelines:</strong>
+                                <ul class="list-unstyled mt-2">
+                                    <li><i class="fas fa-info text-info me-2"></i>Maximum file size: 16MB</li>
+                                    <li><i class="fas fa-info text-info me-2"></i>Minimum resolution: 32x32</li>
+                                    <li><i class="fas fa-info text-info me-2"></i>Optimal resolution: 224x224+</li>
+                                    <li><i class="fas fa-info text-info me-2"></i>Clear, well-lit images work best</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadArea = document.getElementById('upload-area');
+    const fileInput = document.getElementById('file-input');
+    const browseBtn = document.getElementById('browse-btn');
+    const uploadPreview = document.getElementById('upload-preview');
+    const previewImage = document.getElementById('preview-image');
+    const fileName = document.getElementById('file-name');
+    const fileSize = document.getElementById('file-size');
+    const submitBtn = document.getElementById('submit-btn');
+    const uploadForm = document.getElementById('upload-form');
+    const progressSection = document.getElementById('progress-section');
+    const progressBar = document.getElementById('progress-bar');
+    
+    // Browse button click handler - single event
+    browseBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        fileInput.click();
+    });
+    
+    // Upload area click handler - only for reset functionality
+    uploadArea.addEventListener('click', function(e) {
+        // Only reset if preview is showing and not clicking the browse button
+        if (!uploadPreview.classList.contains('d-none') && e.target !== browseBtn) {
+            resetUpload();
+        }
+        // Don't trigger file dialog when clicking upload area
+    });
+    
+    // Prevent double-triggering by stopping propagation on browse button
+    browseBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+    
+    // Drag and drop functionality
+    uploadArea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        uploadArea.classList.add('drag-over');
+    });
+    
+    uploadArea.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        uploadArea.classList.remove('drag-over');
+    });
+    
+    uploadArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        uploadArea.classList.remove('drag-over');
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleFile(files[0]);
+        }
+    });
+    
+    // File input change - single handler
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length > 0) {
+            handleFile(e.target.files[0]);
+        }
+    });
+    
+    function resetUpload() {
+        uploadArea.querySelector('.upload-content').classList.remove('d-none');
+        uploadPreview.classList.add('d-none');
+        fileInput.value = '';
+        submitBtn.disabled = true;
+    }
+    
+    function handleFile(file) {
+        // Validate file type
+        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/bmp', 'image/tiff', 'image/webp'];
+        if (!allowedTypes.includes(file.type)) {
+            alert('Please select a valid image file (JPEG, PNG, BMP, TIFF, WebP)');
+            return;
+        }
+        
+        // Validate file size (16MB)
+        if (file.size > 16 * 1024 * 1024) {
+            alert('File size must be less than 16MB');
+            return;
+        }
+        
+        // Update file info
+        fileName.textContent = file.name;
+        fileSize.textContent = formatFileSize(file.size);
+        
+        // Show preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            uploadArea.querySelector('.upload-content').classList.add('d-none');
+            uploadPreview.classList.remove('d-none');
+            submitBtn.disabled = false;
+        };
+        reader.readAsDataURL(file);
+    }
+    
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    
+    // Form submission with progress
+    uploadForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(uploadForm);
+        
+        // Show progress section
+        progressSection.classList.remove('d-none');
+        uploadArea.style.display = 'none';
+        submitBtn.disabled = true;
+        
+        // Simulate progress (since we can't get real progress from Flask easily)
+        let progress = 0;
+        const progressInterval = setInterval(function() {
+            progress += Math.random() * 15;
+            if (progress > 90) progress = 90;
+            progressBar.style.width = progress + '%';
+        }, 500);
+        
+        // Submit form
+        fetch(uploadForm.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            clearInterval(progressInterval);
+            progressBar.style.width = '100%';
+            
+            if (response.ok) {
+                return response.text();
+            } else {
+                throw new Error('Upload failed');
+            }
+        })
+        .then(html => {
+            // Replace page content with response
+            document.open();
+            document.write(html);
+            document.close();
+        })
+        .catch(error => {
+            clearInterval(progressInterval);
+            progressSection.classList.add('d-none');
+            uploadArea.style.display = 'block';
+            submitBtn.disabled = false;
+            alert('Error uploading file: ' + error.message);
+        });
+    });
+    
+    // Remove the redundant upload area click handler that was causing double selection
+    // The reset functionality is now handled in the main upload area click handler above
+});
+</script>
+
+<style>
+.upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-area:hover, .upload-area.drag-over {
+    border-color: #007bff;
+    background-color: #f8f9ff;
+}
+
+.upload-content {
+    width: 100%;
+}
+
+#browse-btn {
+    pointer-events: all;
+}
+
+.task-option {
+    height: 100%;
+}
+
+.task-radio {
+    display: none;
+}
+
+.task-label {
+    display: block;
+    padding: 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 100%;
+    text-align: center;
+}
+
+.task-radio:checked + .task-label {
+    border-color: #007bff;
+    background-color: #f8f9ff;
+}
+
+.task-icon {
+    font-size: 2rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.task-radio:checked + .task-label .task-icon {
+    color: #007bff;
+}
+
+.upload-preview img {
+    max-height: 200px;
+    object-fit: contain;
+}
+</style>
+{% endblock %}

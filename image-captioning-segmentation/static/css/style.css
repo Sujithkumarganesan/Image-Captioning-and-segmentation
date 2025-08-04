@@ -1,0 +1,487 @@
+/* Custom Styles for Image Captioning & Segmentation App */
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content h1 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.hero-content .lead {
+    font-size: 1.25rem;
+    opacity: 0.9;
+}
+
+/* Model Status */
+.model-status {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.status-item i {
+    width: 20px;
+}
+
+/* Demo Container */
+.demo-container {
+    position: relative;
+    display: inline-block;
+}
+
+.overlay-features {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.feature-badge {
+    background: rgba(0, 123, 255, 0.9);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.caption-badge {
+    animation-delay: 0s;
+}
+
+.segment-badge {
+    background: rgba(40, 167, 69, 0.9);
+    animation-delay: 1.5s;
+}
+
+/* Hero Visual and Floating Features */
+.hero-visual {
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.floating-features-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.floating-badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 2rem;
+    border-radius: 25px;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 600;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    animation: floatSmooth 4s ease-in-out infinite;
+}
+
+.floating-badge i {
+    font-size: 1.6rem;
+}
+
+.floating-badge:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.caption-floating {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(0, 86, 179, 0.9));
+    top: 20%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+.caption-floating:hover {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 1), rgba(0, 86, 179, 1));
+    border-color: rgba(0, 123, 255, 0.6);
+}
+
+.segment-floating {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.9), rgba(34, 139, 58, 0.9));
+    bottom: 20%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.segment-floating:hover {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 1), rgba(34, 139, 58, 1));
+    border-color: rgba(40, 167, 69, 0.6);
+}
+
+@keyframes floatSmooth {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+    }
+    25% { 
+        transform: translateY(-15px) rotate(1deg); 
+    }
+    50% { 
+        transform: translateY(-8px) rotate(0deg); 
+    }
+    75% { 
+        transform: translateY(-20px) rotate(-1deg); 
+    }
+}
+
+/* Remove old hero feature styles */
+.hero-features {
+    display: none;
+}
+
+.hero-feature-card {
+    display: none;
+}
+
+/* Feature Cards */
+.feature-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    margin-bottom: 1.5rem;
+}
+
+/* Step Numbers */
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+/* Code Example */
+.code-example {
+    background: #2d3748;
+    border-radius: 10px;
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.code-example pre {
+    margin: 0;
+    color: #e2e8f0;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.loading-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 400px;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafbfc;
+}
+
+.upload-area:hover,
+.upload-area.drag-over {
+    border-color: var(--primary-color);
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.upload-area.drag-over {
+    transform: scale(1.02);
+}
+
+/* Upload Preview */
+.upload-preview img {
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Task Selection */
+.task-option {
+    height: 100%;
+}
+
+.task-radio {
+    display: none;
+}
+
+.task-label {
+    display: block;
+    padding: 1.5rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 100%;
+    text-align: center;
+    background: white;
+}
+
+.task-label:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(0, 123, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.task-radio:checked + .task-label {
+    border-color: var(--primary-color);
+    background-color: rgba(0, 123, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+}
+
+.task-icon {
+    font-size: 2.5rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.task-radio:checked + .task-label .task-icon {
+    color: var(--primary-color);
+}
+
+/* Progress Section */
+.progress-section {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Results Page */
+.result-section {
+    border-left: 4px solid #e9ecef;
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+}
+
+.caption-result {
+    border-left: 4px solid var(--primary-color);
+    background: rgba(0, 123, 255, 0.05);
+}
+
+.segmentation-result img {
+    transition: transform 0.2s ease;
+    border-radius: 8px;
+}
+
+.segmentation-result img:hover {
+    transform: scale(1.05);
+}
+
+/* Confidence Scores */
+.confidence-score .progress {
+    height: 6px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Cards */
+.card {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card-header {
+    border-bottom: none;
+    font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-lg {
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+}
+
+/* API Endpoints */
+.endpoint code {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        text-align: center;
+        padding: 2rem 0;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .demo-container img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .task-label {
+        padding: 1rem 0.5rem;
+    }
+    
+    .task-icon {
+        font-size: 2rem;
+    }
+    
+    .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.slide-up {
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Utilities */
+.shadow-soft {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+.border-radius-lg {
+    border-radius: 15px !important;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Loading Animation */
+.spinner-border-lg {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Image Zoom Effect */
+.zoom-on-hover {
+    transition: transform 0.3s ease;
+}
+
+.zoom-on-hover:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}

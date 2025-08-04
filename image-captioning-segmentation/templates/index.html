@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="display-4 fw-bold mb-4">
+                        AI-Powered Image Analysis
+                    </h1>
+                    <p class="lead mb-4">
+                        Transform your images with state-of-the-art deep learning models. 
+                        Generate captions, perform segmentation, and analyze visual content 
+                        with cutting-edge AI technology.
+                    </p>
+                    
+                    <!-- Model Status -->
+                    <div class="model-status mb-4">
+                        <h5>Model Status</h5>
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <div class="status-item">
+                                    <i class="fas fa-comment-alt me-2"></i>
+                                    <span>Captioning:</span>
+                                    {% if loading_status.captioning %}
+                                        <span class="badge bg-success">Ready</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">Loading...</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="status-item">
+                                    <i class="fas fa-puzzle-piece me-2"></i>
+                                    <span>Segmentation:</span>
+                                    {% if loading_status.segmentation %}
+                                        <span class="badge bg-success">Ready</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">Loading...</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="status-item">
+                                    <i class="fas fa-brain me-2"></i>
+                                    <span>Integrated:</span>
+                                    {% if loading_status.integrated %}
+                                        <span class="badge bg-success">Ready</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">Loading...</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-buttons">
+                        <a href="{{ url_for('upload_file') }}" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-upload me-2"></i>
+                            Start Analyzing
+                        </a>
+                        <a href="#features" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-visual">
+                    <div class="floating-features-container">
+                        <!-- Floating Smart Captions Badge -->
+                        <div class="floating-badge caption-floating">
+                            <i class="fas fa-comment-alt"></i>
+                            <span>Smart Captions</span>
+                        </div>
+                        
+                        <!-- Floating Pixel Segmentation Badge -->
+                        <div class="floating-badge segment-floating">
+                            <i class="fas fa-puzzle-piece"></i>
+                            <span>Pixel Segmentation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<section id="features" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Powerful AI Features</h2>
+            <p class="lead">Discover what our advanced models can do for your images</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="feature-card text-center p-4 h-100">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-comment-alt fa-3x text-primary"></i>
+                    </div>
+                    <h4>Image Captioning</h4>
+                    <p class="text-muted">
+                        Generate natural language descriptions for any image using 
+                        transformer-based models like BLIP and Vision-GPT.
+                    </p>
+                    <ul class="list-unstyled text-start">
+                        <li><i class="fas fa-check text-success me-2"></i>Natural language descriptions</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Context-aware captions</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Multiple model options</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="feature-card text-center p-4 h-100">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-puzzle-piece fa-3x text-success"></i>
+                    </div>
+                    <h4>Semantic Segmentation</h4>
+                    <p class="text-muted">
+                        Perform pixel-level classification and object segmentation 
+                        using state-of-the-art architectures.
+                    </p>
+                    <ul class="list-unstyled text-start">
+                        <li><i class="fas fa-check text-success me-2"></i>Pixel-level accuracy</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Multiple object classes</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Color-coded visualization</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="feature-card text-center p-4 h-100">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-brain fa-3x text-info"></i>
+                    </div>
+                    <h4>Multi-Task Analysis</h4>
+                    <p class="text-muted">
+                        Combined model that performs both captioning and segmentation 
+                        simultaneously for comprehensive analysis.
+                    </p>
+                    <ul class="list-unstyled text-start">
+                        <li><i class="fas fa-check text-success me-2"></i>Unified processing</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Shared representations</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Enhanced accuracy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">How It Works</h2>
+            <p class="lead">Simple steps to analyze your images</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 text-center">
+                <div class="step-number mb-3">1</div>
+                <h5>Upload Image</h5>
+                <p class="text-muted">Choose an image from your device (JPG, PNG, BMP, TIFF)</p>
+            </div>
+            <div class="col-lg-3 text-center">
+                <div class="step-number mb-3">2</div>
+                <h5>Select Task</h5>
+                <p class="text-muted">Choose captioning, segmentation, or both tasks</p>
+            </div>
+            <div class="col-lg-3 text-center">
+                <div class="step-number mb-3">3</div>
+                <h5>AI Processing</h5>
+                <p class="text-muted">Our models analyze your image using deep learning</p>
+            </div>
+            <div class="col-lg-3 text-center">
+                <div class="step-number mb-3">4</div>
+                <h5>View Results</h5>
+                <p class="text-muted">Get captions, segmentation maps, and visual overlays</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if not models_loaded %}
+<div class="loading-overlay">
+    <div class="loading-content text-center">
+        <div class="spinner-border text-primary mb-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <h4>Loading AI Models...</h4>
+        <p class="text-muted">Please wait while we initialize the neural networks</p>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Auto-refresh model status
+    function updateModelStatus() {
+        fetch('/api/v1/health')
+            .then(response => response.json())
+            .then(data => {
+                if (data.models) {
+                    // Update status badges
+                    updateStatusBadge('captioning', data.models.captioning);
+                    updateStatusBadge('segmentation', data.models.segmentation);
+                    updateStatusBadge('integrated', data.models.integrated);
+                    
+                    // Hide loading overlay if all models are loaded
+                    if (data.models.captioning && data.models.segmentation && data.models.integrated) {
+                        const overlay = document.querySelector('.loading-overlay');
+                        if (overlay) {
+                            overlay.style.display = 'none';
+                        }
+                    }
+                }
+            })
+            .catch(error => console.log('Status check failed:', error));
+    }
+    
+    function updateStatusBadge(model, isLoaded) {
+        const badges = document.querySelectorAll(`.status-item:contains('${model}')`);
+        // Implementation would update badge classes based on status
+    }
+    
+    // Check status every 5 seconds if models aren't loaded
+    {% if not models_loaded %}
+    setInterval(updateModelStatus, 5000);
+    {% endif %}
+</script>
+{% endblock %}
